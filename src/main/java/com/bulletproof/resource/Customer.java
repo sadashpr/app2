@@ -1,11 +1,12 @@
 package com.bulletproof.resource;
 
-import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 import org.hibernate.search.annotations.Field;
 
-@Entity
+@javax.persistence.Entity
+@Table(name = "customer")
 public class Customer {
 
     private static long counter = 1;
@@ -18,6 +19,10 @@ public class Customer {
     private String lastname;
     @Field
     private String city;
+
+    public Customer() {
+	this.id = counter++;
+    }
 
     public Customer(String firstname, String lastname, String city) {
 
@@ -60,10 +65,9 @@ public class Customer {
 	this.city = city;
     }
 
-    /*
-     * @Override public String toString() { return "Customer [ ID =" + id +
-     * ", firstname=" + firstname + ", lastname=" + lastname + ", city=" + city +
-     * "]"; }
-     */
+    @Override
+    public String toString() {
+	return "Customer [ ID =" + id + ", firstname=" + firstname + ", lastname=" + lastname + ", city=" + city + "]";
+    }
 
 }
