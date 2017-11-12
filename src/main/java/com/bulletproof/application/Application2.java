@@ -11,9 +11,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-import com.bulletproof.resource.CSVParser;
-import com.google.gson.JsonArray;
-
 @SpringBootApplication(scanBasePackages = "com.bulletproof")
 @Configuration
 @ComponentScan({ "com.bulletproof.service", "com.bulletproof.repository", "com.bulletproof" })
@@ -21,19 +18,15 @@ import com.google.gson.JsonArray;
 	"com.bulletproof.model" })
 @EntityScan("com.bulletproof.model")
 @EnableAutoConfiguration
-public class CsvJsonApplication {
+public class Application2 {
 
     // store the parsed csv data for quick retrieval.
-    public static JsonArray jsonCustomer;
+    // public static JsonArray jsonCustomer;
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
-	CSVParser parser = new CSVParser();
-	parser.parseData();
-	jsonCustomer = parser.getJsondata();
-
 	// start springboot application.
-	SpringApplication.run(CsvJsonApplication.class, args);
+	SpringApplication.run(Application2.class, args);
     }
 
 }

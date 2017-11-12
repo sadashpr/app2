@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bulletproof.application.CsvJsonApplication;
 import com.bulletproof.model.Customer;
 import com.bulletproof.resource.JsonCustomerParser;
 import com.bulletproof.service.CustomerService;
@@ -27,17 +26,6 @@ public class CustomerServiceController {
 
     @Autowired
     private JsonCustomerParser jsonCustomerParser;
-
-    /**
-     * part of application 1 post json data to rest end point.
-     * 
-     * @return
-     */
-    @RequestMapping(value = "/rest/customer", method = RequestMethod.POST)
-    public String sendCSVCustomerData() {
-
-	return CsvJsonApplication.jsonCustomer.toString();
-    }
 
     /**
      * gets data as JSON String with array of customers (from application 1)and
