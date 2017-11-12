@@ -13,30 +13,41 @@ import com.google.gson.JsonArray;
 
 public class CSVParser {
 
+    // link to the CSV file.
     private static final String csvFile = "Book1.csv";
     private static ArrayList<Customer> customers = new ArrayList<>();
 
+    /**
+     * Logic to parse CSV to customer objects
+     * 
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public void parseData() throws FileNotFoundException, IOException {
 
 	BufferedReader bReader = new BufferedReader(
 		new InputStreamReader(this.getClass().getResourceAsStream("/" + csvFile)));
 
-	String[] str;
+	String[] fields;
 	String line;
+	// read one line at a time
 	while ((line = bReader.readLine()) != null) {
-	    str = line.split(",");
-	    Customer c = new Customer(str[0], str[1], str[2]);
+	    fields = line.split(",");
+	    Customer c = new Customer(fields[0], fields[1], fields[2]);
 	    customers.add(c);
-	    // System.out.println(c);
 	}
-
     }
 
+    /**
+     * get a json array from list of objects
+     * 
+     * @return
+     * @throws JsonProcessingException
+     */
     public JsonArray getJsondata() throws JsonProcessingException {
 
 	Gson gson = new GsonBuilder().create();
 	JsonArray jsonCustomer = gson.toJsonTree(customers).getAsJsonArray();
-
 	return jsonCustomer;
     }
 

@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -18,8 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @PropertySource("classpath:Hibernate.properties")
-@EnableJpaRepositories({ "com.bulletproof.service", "com.bulletproof.resource", "com.bulletproof.repository",
-	"com.bulletproof" })
+
 @EnableTransactionManagement
 public class DatabaseConfig {
 
@@ -40,7 +38,6 @@ public class DatabaseConfig {
 	LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 	entityManagerFactoryBean.setDataSource(dataSource());
 	entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
-
 	entityManagerFactoryBean
 		.setPackagesToScan(environment.getRequiredProperty(PROPERTY_NAME_ENTITYMANAGER_PACKAGES_TO_SCAN));
 	entityManagerFactoryBean.setJpaProperties(getHibernateProperties());

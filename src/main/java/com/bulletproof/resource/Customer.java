@@ -9,9 +9,11 @@ import org.hibernate.search.annotations.Field;
 @Table(name = "customer")
 public class Customer {
 
+    // counter to generate ID on own.
     private static long counter = 1;
 
     @Id
+    // @GeneratedValue(strategy = GenerationType.IDENTITY) can be used later.
     private long id;
     @Field
     private String firstname;
@@ -21,24 +23,24 @@ public class Customer {
     private String city;
 
     public Customer() {
+
 	this.id = counter++;
     }
 
     public Customer(String firstname, String lastname, String city) {
 
 	this.id = counter++;
-	// TODO use UUID.randomUUID().toString() later
 	this.firstname = firstname;
 	this.lastname = lastname;
 	this.city = city;
     }
 
-    public long getId() {
-	return id;
-    }
+    public Customer(long id, String firstname, String lastname, String city) {
 
-    public void setId(long id) {
 	this.id = id;
+	this.firstname = firstname;
+	this.lastname = lastname;
+	this.city = city;
     }
 
     public String getFirstname() {

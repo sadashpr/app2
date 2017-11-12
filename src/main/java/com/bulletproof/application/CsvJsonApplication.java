@@ -2,7 +2,6 @@ package com.bulletproof.application;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,7 +11,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.bulletproof.resource.CSVParser;
-import com.bulletproof.resource.Customer;
 import com.google.gson.JsonArray;
 
 @SpringBootApplication(scanBasePackages = "com.bulletproof")
@@ -22,8 +20,7 @@ import com.google.gson.JsonArray;
 @EntityScan("com.bulletproof.resource")
 public class CsvJsonApplication {
 
-    public static HashMap<String, Customer> hmCustomer;
-    public static long ID;
+    // store the parsed csv data for quick retrieval.
     public static JsonArray jsonCustomer;
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
@@ -32,7 +29,7 @@ public class CsvJsonApplication {
 	parser.parseData();
 	jsonCustomer = parser.getJsondata();
 
-	// System.out.println(jsonCustomer.toString());
+	// start springboot application.
 	SpringApplication.run(CsvJsonApplication.class, args);
     }
 
