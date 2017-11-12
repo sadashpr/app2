@@ -9,11 +9,12 @@ import org.hibernate.search.annotations.Field;
 @Table(name = "customer")
 public class Customer {
 
-    // counter to generate ID on own.
+    // counter to generate ID on own to avoid database performace hit.
     private static long counter = 1;
 
     @Id
-    // @GeneratedValue(strategy = GenerationType.IDENTITY) can be used later.
+    // can be used . but comes with a performance cost.
+    // @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Field
     private String firstname;
