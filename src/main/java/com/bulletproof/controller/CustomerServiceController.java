@@ -1,4 +1,4 @@
-package com.bulletproof.service;
+package com.bulletproof.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,17 +10,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bulletproof.application.CsvJsonApplication;
-import com.bulletproof.repository.CustomerRepository;
-import com.bulletproof.resource.Customer;
+import com.bulletproof.model.Customer;
 import com.bulletproof.resource.JsonCustomerParser;
+import com.bulletproof.service.CustomerService;
 
 @RestController
 @Component
 @RequestMapping(value = "/")
 public class CustomerServiceController {
 
+    // @Autowired
+    // private CustomerRepository customerRepository;
+
     @Autowired
-    private CustomerRepository customerRepository;
+    private CustomerService customerService;
+
+    @Autowired
+    private JsonCustomerParser jsonCustomerParser;
 
     /**
      * part of application 1 post json data to rest end point.
@@ -44,9 +50,9 @@ public class CustomerServiceController {
     public String allAllCustomerData(@RequestBody(required = true) String data) {
 
 	// assume happy case
-	Customer[] customers = JsonCustomerParser.convertToManyCustomers(data);
+	Customer[] customers = jsonCustomerParser.convertToManyCustomers(data);
 	for (Customer customer : customers) {
-	    customerRepository.save(customer);
+	    customerService.save(customer);
 	}
 	return "Saved all customer data";
     }
@@ -59,7 +65,7 @@ public class CustomerServiceController {
     @GetMapping(path = "/rest/showallcustomers")
     public @ResponseBody Iterable<Customer> getAllUsers() {
 	// This returns a JSON with all customers
-	return customerRepository.findAll();
+	return customerService.findAll();
     }
 
     /**
@@ -73,8 +79,8 @@ public class CustomerServiceController {
     public String addACustomer(@RequestBody(required = true) String data) {
 
 	// assume happy case Scenario and parse for now .
-	Customer c = JsonCustomerParser.convertToACustomer(data);
-	customerRepository.save(c);
+	Customer c = jsonCustomerParser.convertToACustomer(data);
+	customerService.save(c);
 	return "Saved";
     }
 
@@ -88,7 +94,7 @@ public class CustomerServiceController {
     @RequestMapping(value = "/rest/searchacustomerbyID", method = RequestMethod.POST)
     public Customer searchACustomerbyID(@RequestBody(required = true) String id) {
 
-	return customerRepository.findOne(Long.valueOf(id));
+	return customerService.findOne(Long.valueOf(id));
     }
 
     /**
@@ -100,7 +106,7 @@ public class CustomerServiceController {
     @RequestMapping(value = "/rest/searchacustomerbyfirstname", method = RequestMethod.POST)
     public Customer[] searchACustomerbyFirstname(@RequestBody(required = true) String firstname) {
 
-	return customerRepository.findCustomerByFirstname(firstname);
+	return customerService.findCustomerByFirstname(firstname);
 
     }
 

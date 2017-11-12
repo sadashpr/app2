@@ -6,11 +6,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import org.springframework.stereotype.Service;
+
+import com.bulletproof.model.Customer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 
+@Service
 public class CSVParser {
 
     // link to the CSV file.

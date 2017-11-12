@@ -1,7 +1,11 @@
 package com.bulletproof.resource;
 
+import org.springframework.stereotype.Service;
+
+import com.bulletproof.model.Customer;
 import com.google.gson.Gson;
 
+@Service
 public class JsonCustomerParser {
 
     /**
@@ -10,7 +14,7 @@ public class JsonCustomerParser {
      * @param data
      * @return
      */
-    public static Customer convertToACustomer(String data) {
+    public Customer convertToACustomer(String data) {
 
 	Gson g = new Gson();
 	Customer customer = g.fromJson(data, Customer.class);
@@ -24,7 +28,7 @@ public class JsonCustomerParser {
      * @param data
      * @return
      */
-    public static Customer[] convertToManyCustomers(String data) {
+    public Customer[] convertToManyCustomers(String data) {
 
 	System.out.println(data);
 	Gson g = new Gson();

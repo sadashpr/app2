@@ -1,4 +1,4 @@
-package com.bulletproof.resource;
+package com.bulletproof.model;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
